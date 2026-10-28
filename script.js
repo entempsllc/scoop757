@@ -1,29 +1,56 @@
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Quote form: send in the background; if the form service is down,
-// hand the details to the visitor's text/email app so no lead is lost.
+// Quote form: Web3Forms first, FormSubmit as backup, then a prefilled
+// text/email handoff if both are down. Visitors never leave the site.
 (function () {
   var form = document.querySelector('.quote-form');
   if (!form || !window.fetch) return;
   var btn = form.querySelector('button[type="submit"]');
   var box = form.querySelector('.form-fallback');
-  var endpoint = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
-  var thanks = form.querySelector('input[name="_next"]').value;
+  var thanks = 'https://www.scoop757.com/thanks.html';
   var PHONE = '+17574535527';
   var EMAIL = 'entempsllc@gmail.com';
+  var FIELDS = ['name', 'phone', 'email', 'address', 'zip', 'dogs', 'service', 'notes'];
 
-  function summary() {
-    var v = function (n) { return (form.elements[n].value || '').trim(); };
-    return 'Scoop 757 quote request\n' +
-      'Name: ' + v('name') + '\nPhone: ' + v('phone') +
+  function v(n) { return (form.elements[n].value || '').trim(); }
+  function lead() { var o = {}; FIELDS.forEach(function (n) { o[n] = v(n); }); return o; }
+
+  function post(url, data, ok) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var t = setTimeout(function () { if (ctrl) ctrl.abort(); }, 10000);
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) { return r.json(); })
+      .then(function (d) { clearTimeout(t); if (!ok(d)) throw new Error('rejected'); })
+      .catch(function (e) { clearTimeout(t); throw e; });
+  }
+
+  function viaWeb3Forms() {
+    var d = lead();
+    d.access_key = form.elements.access_key.value;
+    d.subject = 'New Scoop 757 quote request';
+    d.from_name = 'Scoop 757 website';
+    return post('https://api.web3forms.com/submit', d, function (r) { return r.success === true; });
+  }
+
+  function viaFormSubmit() {
+    var d = lead();
+    d._subject = 'New Scoop 757 quote request';
+    d._template = 'table';
+    return post('https://formsubmit.co/ajax/0e4117f7c5818648cb3d86261f630361', d,
+      function (r) { return String(r.success) === 'true'; });
+  }
+
+  function showFallback() {
+    var body = 'Scoop 757 quote request\nName: ' + v('name') + '\nPhone: ' + v('phone') +
       (v('email') ? '\nEmail: ' + v('email') : '') +
       '\nAddress: ' + v('address') + ' ' + v('zip') +
       '\nDogs: ' + v('dogs') + '\nService: ' + v('service') +
       (v('notes') ? '\nNotes: ' + v('notes') : '');
-  }
-
-  function showFallback() {
-    var body = encodeURIComponent(summary());
+    body = encodeURIComponent(body);
     var sep = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) ? '&' : '?';
     box.querySelector('.fb-sms').href = 'sms:' + PHONE + sep + 'body=' + body;
     box.querySelector('.fb-mail').href = 'mailto:' + EMAIL +
@@ -34,29 +61,16 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (form.querySelector('input[name="_honey"]').value) return; // bot
+    if (form.elements.botcheck.checked) return; // bot
     var label = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Sending...';
     box.hidden = true;
 
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 10000);
-
-    fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form),
-      signal: ctrl ? ctrl.signal : undefined
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        clearTimeout(timer);
-        if (String(d.success) === 'true') { window.location.href = thanks; }
-        else { throw new Error(d.message); }
-      })
+    viaWeb3Forms()
+      .catch(viaFormSubmit)
+      .then(function () { window.location.href = thanks; })
       .catch(function () {
-        clearTimeout(timer);
         btn.disabled = false;
         btn.textContent = label;
         showFallback();
