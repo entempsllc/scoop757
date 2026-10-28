@@ -163,3 +163,6 @@ details p{color:var(--muted);margin:12px 0 0}
 }
 
 .quote-form button[disabled]{opacity:.7;cursor:wait}
+.form-fallback{margin-top:14px;padding:14px;border:2px solid #E0A800;border-radius:12px;background:#FFF8E1}
+.form-fallback p{margin:0 0 10px;font-size:.95rem}
+.form-fallback .btn{margin-top:8px;display:block}
