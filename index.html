@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -64,6 +64,7 @@
           <a href="#quote" class="btn">Get my free first cleanup</a>
           <a href="#pricing" class="btn btn-ghost">See pricing</a>
         </div>
+        <p class="cta-note">Free first cleanup for new weekly customers.</p>
         <ul class="trust">
           <li>No contracts</li>
           <li>Tools disinfected between every yard</li>
@@ -91,7 +92,7 @@
         <li>
           <span class="num">1</span>
           <h3>Request a quote</h3>
-          <p>Tell us how many dogs you have and where you live. We'll reply the same day with your price.</p>
+          <p>Tell us how many dogs you have and where you live. We'll text you your price, usually the same day.</p>
         </li>
         <li>
           <span class="num">2</span>
@@ -133,9 +134,10 @@
           <a href="https://buy.stripe.com/28E5kw4YQ0AK6IdguYg7e02" class="btn btn-ghost">Start 3-dog plan</a>
         </div>
       </div>
-      <p class="secure-note">🔒 Secure checkout by Stripe. Your first weekly visit is free.</p>
+      <p class="secure-note">🔒 Secure checkout by Stripe. 7-day free trial covers your first weekly visit. Cancel anytime.</p>
+      <p class="legal-note">By signing up you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</p>
       <div class="extras">
-        <div><strong>+$15/mo</strong> each additional dog</div>
+        <div><strong>4+ dogs</strong> +$15/mo for each dog beyond 3</div>
         <div><strong>Twice weekly</strong> available on request</div>
         <div><strong>One-time cleanup</strong> from $100</div>
         <div><strong>Yard deodorizer</strong> add-on $15/visit</div>
@@ -144,7 +146,7 @@
   </section>
 
   <!-- WHY -->
-  <section class="section">
+  <section id="about" class="section">
     <div class="wrap why-grid">
       <div>
         <h2>Local. Owner-run. Not a franchise call center.</h2>
@@ -196,7 +198,8 @@
       <div>
         <h2>Get your free first cleanup</h2>
         <p class="section-sub left">Fill this out and we'll text you your price and first visit date, usually the same day.</p>
-        <p class="call-line">Prefer to talk? <a href="tel:+17574535527">(757) 453-5527</a></p>
+        <p class="call-line">Prefer to talk? Call or text <a href="tel:+17574535527">(757) 453-5527</a></p>
+        <p class="call-line">Or email <a href="mailto:entempsllc@gmail.com">entempsllc@gmail.com</a></p>
       </div>
       <form class="quote-form" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="5392236d-4420-4701-88e9-371741d28593">
@@ -223,6 +226,7 @@
         </label>
         <label>Anything we should know? <span class="opt">(optional)</span><textarea name="notes" rows="3" placeholder="Gate code, dog names, yard size..."></textarea></label>
         <button type="submit" class="btn btn-full">Send my quote request</button>
+        <p class="legal-note">We only use your details to quote and schedule service. See our <a href="privacy.html">Privacy Policy</a>.</p>
         <div class="form-fallback" hidden>
           <p><strong>Our form is having trouble right now.</strong> Tap below to send the same details by text or email. Everything is already filled in.</p>
           <a class="btn btn-full fb-sms" href="sms:+17574535527">Text my request</a>
@@ -235,14 +239,36 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <p><strong>Scoop 757</strong> · Dog poop removal in Virginia Beach &amp; Chesapeake, VA</p>
-    <p><a href="tel:+17574535527">(757) 453-5527</a> · © <span id="yr">2026</span> Scoop 757</p>
+  <div class="wrap footer-grid">
+    <div>
+      <p class="f-brand"><strong>Scoop 757</strong></p>
+      <p>Dog poop removal in Virginia Beach &amp; Chesapeake, VA. Local and owner-operated.</p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="f-head">Site</p>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About us</a>
+      <a href="#faq">FAQ</a>
+      <a href="#quote">Free quote</a>
+    </nav>
+    <div>
+      <p class="f-head">Contact</p>
+      <a href="tel:+17574535527">(757) 453-5527</a>
+      <a href="sms:+17574535527">Text us</a>
+      <a href="mailto:entempsllc@gmail.com">entempsllc@gmail.com</a>
+    </div>
+    <div>
+      <p class="f-head">Legal</p>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
   </div>
+  <div class="wrap f-bottom">© <span id="yr">2026</span> Scoop 757 · Operated by Entemps LLC</div>
 </footer>
 
 <a href="tel:+17574535527" class="mobile-call">Call or text (757) 453-5527</a>
 
-<script src="script.js?v=5"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>

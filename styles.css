@@ -166,3 +166,28 @@ details p{color:var(--muted);margin:12px 0 0}
 .form-fallback{margin-top:14px;padding:14px;border:2px solid #E0A800;border-radius:12px;background:#FFF8E1}
 .form-fallback p{margin:0 0 10px;font-size:.95rem}
 .form-fallback .btn{margin-top:8px;display:block}
+
+/* notes + legal */
+.cta-note{margin:14px 0 18px;font-size:.92rem;color:var(--muted)}
+.legal-note{margin:10px 0 0;text-align:center;font-size:.85rem;color:var(--muted)}
+.legal-note a{color:inherit;text-decoration:underline}
+.quote-form .legal-note{text-align:left}
+
+/* footer */
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:28px}
+.site-footer p{margin:0 0 8px}
+.site-footer a{display:block;color:#CFCBBE;text-decoration:none;padding:5px 0}
+.site-footer a:hover{color:#fff;text-decoration:underline}
+.f-brand{font-size:1.1rem;color:#fff}
+.f-head{font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.06em;font-size:.8rem}
+.f-bottom{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);font-size:.85rem}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
+@media (max-width:760px){.site-footer{padding-bottom:96px}}
+
+/* legal pages */
+.legal h1{margin-bottom:6px}
+.legal .updated{color:var(--muted);margin:0 0 28px}
+.legal h2{font-size:1.35rem;margin:32px 0 10px}
+.legal ul{padding-left:1.2em}
+.legal li{margin:6px 0}
+.legal a{color:var(--green)}
