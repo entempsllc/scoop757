@@ -129,7 +129,7 @@ details p{color:var(--muted);margin:12px 0 0}
 .quote-form input:focus,.quote-form select:focus,.quote-form textarea:focus{outline:none;border-color:var(--green);background:#fff}
 .quote-form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .opt{font-weight:400;color:var(--muted)}
-.hp{position:absolute;left:-9999px}
+.hp{display:none!important}
 
 /* footer */
 .site-footer{background:var(--ink);color:#CFCBBE;padding:36px 0;font-size:.95rem}

@@ -1,7 +1,7 @@
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Quote form: Web3Forms first, FormSubmit as backup, then a prefilled
-// text/email handoff if both are down. Visitors never leave the site.
+// Quote form: Web3Forms (one retry), then a prefilled
+// text/email handoff if it is down. Visitors never leave the site.
 (function () {
   var form = document.querySelector('.quote-form');
   if (!form || !window.fetch) return;
@@ -36,13 +36,6 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     return post('https://api.web3forms.com/submit', d, function (r) { return r.success === true; });
   }
 
-  function viaFormSubmit() {
-    var d = lead();
-    d._subject = 'New Scoop 757 quote request';
-    d._template = 'table';
-    return post('https://formsubmit.co/ajax/0e4117f7c5818648cb3d86261f630361', d,
-      function (r) { return String(r.success) === 'true'; });
-  }
 
   function showFallback() {
     var body = 'Scoop 757 quote request\nName: ' + v('name') + '\nPhone: ' + v('phone') +
@@ -68,7 +61,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     box.hidden = true;
 
     viaWeb3Forms()
-      .catch(viaFormSubmit)
+      .catch(viaWeb3Forms)
       .then(function () { window.location.href = thanks; })
       .catch(function () {
         btn.disabled = false;
